@@ -280,6 +280,8 @@ public class Level {
         for (RemovableWall w:removableWalls) w.reset();
         for (RemovableSpike s:removableSpikes) s.reset();
         for (TriggeredPlatform tp:triggeredPlatforms) tp.reset();
+        for (MovingSaw s:saws) s.reset();
+        for (MovingPlatform p:platforms) p.reset();
         doorRelocated = false;
     }
 

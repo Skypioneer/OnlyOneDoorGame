@@ -8,12 +8,20 @@ public class MovingSaw {
     public Rectangle rect;
     public float x, y, vx = 3.0f;
     public int size;
+    private final float startX, startY, startVx;   // remembered for reset()
 
     public MovingSaw(int col, int row, int tile){
         size = Math.round(tile*0.8f);
         this.x = col*tile + (tile - size)/2f;
         this.y = row*tile + (tile - size)/2f;
         this.rect = new Rectangle((int)x, (int)y, size, size);
+        this.startX = x; this.startY = y; this.startVx = vx;
+    }
+
+    /** Puts the saw back at its starting position and direction (called on death/restart). */
+    public void reset(){
+        x = startX; y = startY; vx = startVx;
+        rect.x = (int)x; rect.y = (int)y;
     }
 
     public void updateWithSolids(List<Rectangle> solids){

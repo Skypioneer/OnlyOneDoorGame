@@ -7,11 +7,19 @@ import java.util.List;
 public class MovingPlatform {
     Rectangle rect;
     float x, y, vx = 2.0f;
+    private final float startX, startY, startVx;   // remembered for reset()
 
     public MovingPlatform(int col, int row, int tile){
         this.x = col*tile;
         this.y = row*tile;
         this.rect = new Rectangle((int)x, (int)y, tile, tile);
+        this.startX = x; this.startY = y; this.startVx = vx;
+    }
+
+    /** Puts the platform back at its starting position and direction (called on death/restart). */
+    public void reset(){
+        x = startX; y = startY; vx = startVx;
+        rect.x = (int)x; rect.y = (int)y;
     }
 
     public void updateWithSolids(List<Rectangle> solids){

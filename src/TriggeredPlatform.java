@@ -9,16 +9,22 @@ public class TriggeredPlatform {
     public Rectangle rect;
     public float x, y, vx = 2.0f;
     public boolean active = false;
+    private final float startX, startY, startVx;   // remembered for reset()
 
     public TriggeredPlatform(int id, int col, int row, int tile){
         this.id = id;
         this.x = col*tile;
         this.y = row*tile;
         this.rect = new Rectangle((int)x, (int)y, tile, tile);
+        this.startX = x; this.startY = y; this.startVx = vx;
     }
 
     public void setActive(boolean a){ active = a; }
-    public void reset(){ active = false; }
+    public void reset(){
+        active = false;
+        x = startX; y = startY; vx = startVx;
+        rect.x = (int)x; rect.y = (int)y;
+    }
 
     public void updateWithSolids(List<Rectangle> solids){
         if (!active) return;
